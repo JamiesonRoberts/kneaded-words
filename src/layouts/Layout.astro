@@ -1,5 +1,6 @@
 ---
 import { Font } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
 
 import '../styles/global.scss'
 
@@ -53,17 +54,8 @@ const year = date.getFullYear()
       content={seo?.imageAlt ?? defaultSiteImageAlt}
     />
 
-    <meta
-      name='theme-color'
-      media='(prefers-color-scheme: light)'
-      content='#F7F7F7'
-    />
-    <meta
-      name='theme-color'
-      media='(prefers-color-scheme: dark)'
-      content='#1C1C1B'
-    />
-    <meta name='color-scheme' content='light dark' />
+    <meta name='theme-color' content='#FFFFFF' />
+    <meta name='color-scheme' content='only light' />
 
     <link rel='icon' href='/favicon.ico' sizes='any' />
     <link rel='icon' href='/icon.svg' type='image/svg+xml' />
@@ -72,14 +64,19 @@ const year = date.getFullYear()
     <link rel='manifest' href='/manifest.webmanifest' />
 
     <Font cssVariable='--primary-font' />
+    <Font cssVariable='--secondary-font' />
+    <Font cssVariable='--title-font' />
+    <ClientRouter />
   </head>
   <body>
-    <header></header>
+    <header>
+      <h1><a href='/'>Kneaded Words</a></h1>
+    </header>
     <slot />
     <footer class:list={['footer', 'wrapper']}>
-      <p>
-        Copyright &copy; {year}.
-      </p>
+      <span>
+        Copyright &copy; {year} | Nadia Petrasiunas
+      </span>
     </footer>
   </body>
 </html>

@@ -6,9 +6,22 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: 'Roboto Flex',
+      name: 'Vollkorn',
       cssVariable: '--primary-font',
-      fallbacks: ['Helvetica Neue', 'Helvetica'],
+      fallbacks: ['Georgia', 'Times New Roman', 'serif'],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Noto Sans',
+      cssVariable: '--secondary-font',
+      fallbacks: ['Helvetica', 'sans-serif'],
+      subsets: ['latin'],
+    },
+    {
+      provider: fontProviders.google(),
+      name: 'Permanent Marker',
+      cssVariable: '--title-font',
       subsets: ['latin'],
     },
   ],

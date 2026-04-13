@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content'
+
+import Layout from '../layouts/Layout.astro'
+
+const blogEntries = await getCollection('posts')
+const sortedPosts = blogEntries.sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+)
+
+const page = {
+  data: sortedPosts.slice(0, Math.min(5, sortedPosts.length)),
+  start: 0,
+  end: Math.min(4, sortedPosts.length),
+  size: Math.min(5, sortedPosts.length),
+  total: blogEntries.length,
+  currentPage: 1,
+  lastPage: Math.ceil(blogEntries.length / 5),
+  url: {
+    current: '/',
+    next: '/page/2',
+    prev: null,
+    first: null,
+    last: `/page/${Math.ceil(blogEntries.length / 5)}`,
+  },
+}
+console.log(page)
+
+const seo = {}
+---
+
+<Layout seo={seo}>
+  <div>
+    {page.data.map((post) => <p>{post.data.title}</p>)}
+  </div>
+
+  <!-- Pagination Navigation -->
+  <nav>
+    <span>Page {page?.currentPage} of {page?.lastPage}</span>
+    {page?.url.next ? <a href={page?.url.next}>Next</a> : null}
+  </nav>
+</Layout>

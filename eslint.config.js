@@ -38,6 +38,7 @@ export default defineConfig([
       'no-new': 0,
       'no-undef': 'off', // Disable "not defined" errors for specific Astro types that are globally available (ImageMetadata)
       'react/jsx-boolean-value': ['error', 'never', { always: ['priority'] }],
+      'react/jsx-key': 'off',
     },
   },
 

@@ -1,0 +1,42 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  page: Page<Post>
+}
+
+import Layout from '@/layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+const { page } = Astro.props
+const seo = {}
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const blogEntries = await getCollection('posts')
+  const sortedPosts = blogEntries.sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  )
+
+  return paginate(sortedPosts, { pageSize: 5 })
+}) satisfies GetStaticPaths
+
+console.log(page)
+---
+
+<Layout seo={seo}>
+  <h1>Blog Archives</h1>
+
+  <div>
+    {page.data.map((post) => <p>{post?.data.title}</p>)}
+  </div>
+
+  <!-- Pagination Navigation -->
+  <nav>
+    {page.url.prev ? <a href={page.url.prev}>Previous</a> : null}
+    <span>Page {page.currentPage} of {page.lastPage}</span>
+    {page.url.next ? <a href={page.url.next}>Next</a> : null}
+  </nav>
+</Layout>
