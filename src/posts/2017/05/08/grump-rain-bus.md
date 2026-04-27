@@ -1,6 +1,6 @@
 ---
 title: 'grump. rain. bus.'
-date: 2017-05-08
+date: 2017-05-08T22:32:06.000Z
 categories:
   - 'poetry'
   - 'writing'
@@ -13,6 +13,7 @@ tags:
   - 'strangers'
   - 'true-story'
   - 'writing'
+handle: 'grump-rain-bus'
 ---
 
 _Tuesday Morning_

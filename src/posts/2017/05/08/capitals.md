@@ -1,6 +1,6 @@
 ---
 title: 'capitals'
-date: 2017-05-08
+date: 2017-05-08T22:35:30.000Z
 categories:
   - 'poetry'
   - 'writing'
@@ -9,6 +9,7 @@ tags:
   - 'rebellion'
   - 'writer'
   - 'writing'
+handle: 'capitals'
 ---
 
 i hate starting my sentences with capitals.

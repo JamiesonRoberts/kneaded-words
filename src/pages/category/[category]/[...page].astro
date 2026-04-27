@@ -1,0 +1,54 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  page: Page<Post>
+}
+
+import { getCollection } from 'astro:content'
+import { POST_SORT, PAGE_SIZE } from '@/constants'
+
+import Layout from '@/layouts/Layout.astro'
+import Pagination from '@/components/Pagination.astro'
+import Heading from '@/components/Heading.astro'
+import Excerpt from '@/components/Excerpt.astro'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('posts')
+
+  const categories = [
+    ...new Set(
+      posts
+        .map((post: Post) => post.data?.categories)
+        .filter(Boolean)
+        .flat(),
+    ),
+  ]
+
+  return categories.flatMap((category: string) => {
+    const filteredPosts = posts
+      .filter((post: Post) => post.data?.categories?.includes(category))
+      .sort(POST_SORT)
+
+    return paginate(filteredPosts, {
+      params: { category },
+      pageSize: PAGE_SIZE,
+    })
+  })
+}) satisfies GetStaticPaths
+
+const { page } = Astro.props
+const { category } = Astro.params
+
+const seo = {}
+---
+
+<Layout seo={seo} hasPageTitle>
+  <Heading text={category} prefix={'Category'} page={page} />
+
+  {page.data.map((post) => <Excerpt post={post} />)}
+
+  <Pagination page={page} />
+</Layout>

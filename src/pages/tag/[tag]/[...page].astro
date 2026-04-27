@@ -1,0 +1,56 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  page: Page<Post>
+}
+
+import { getCollection } from 'astro:content'
+import { POST_SORT, PAGE_SIZE } from '@/constants'
+
+import Layout from '@/layouts/Layout.astro'
+import Pagination from '@/components/Pagination.astro'
+import Heading from '@/components/Heading.astro'
+import Excerpt from '@/components/Excerpt.astro'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('posts')
+
+  // 1. Get a unique list of all tags
+  const uniqueTags = [
+    ...new Set(
+      posts
+        .map((post: Post) => post.data?.tags)
+        .filter(Boolean)
+        .flat(),
+    ),
+  ]
+
+  // 2. For every tag, generate paginated routes
+  return uniqueTags.flatMap((tag: string) => {
+    const filteredPosts = posts
+      .filter((post: Post) => post.data?.tags?.includes(tag))
+      .sort(POST_SORT)
+
+    return paginate(filteredPosts, {
+      params: { tag }, // Matches the [tag] folder
+      pageSize: PAGE_SIZE, // Posts per page
+    })
+  })
+}) satisfies GetStaticPaths
+
+const { page } = Astro.props
+const { tag } = Astro.params
+
+const seo = {}
+---
+
+<Layout seo={seo} hasPageTitle>
+  <Heading text={tag} prefix={'Tag'} page={page} />
+
+  {page.data.map((post) => <Excerpt post={post} />)}
+
+  <Pagination page={page} />
+</Layout>

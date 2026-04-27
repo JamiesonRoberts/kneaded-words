@@ -1,6 +1,6 @@
 ---
 title: 'Excerpt - Bottled Fish'
-date: 2017-05-08
+date: 2017-05-08T22:43:08.000Z
 categories:
   - 'short-story'
   - 'writing'
@@ -11,6 +11,7 @@ tags:
   - 'mystery'
   - 'short-story'
   - 'writing'
+handle: 'excerpt-bottled-fish'
 ---
 
 An excerpt from Bottled Fish, a short story inspired by “[A Fish for Eve](http://ursulav.deviantart.com/art/Gearworld-Fish-for-Eve-81777738)”, “[Spawning Wall](http://ursulav.deviantart.com/art/Gearworld-Spawning-Wall-47426386)”, and "[Root Faucet](http://ursulav.deviantart.com/art/Gearworld-Roots-11505054)" by Ursula Vernon

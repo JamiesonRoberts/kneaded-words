@@ -1,6 +1,6 @@
 ---
 title: 'Spaces - 1.2 House'
-date: 2017-05-08
+date: 2017-05-08T22:39:33.000Z
 categories:
   - 'poetry'
   - 'writing'
@@ -12,6 +12,7 @@ tags:
   - 'set'
   - 'voices'
   - 'writing'
+handle: 'spaces-1-2-house'
 ---
 
 _drip._

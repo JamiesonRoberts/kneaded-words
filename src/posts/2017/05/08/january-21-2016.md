@@ -1,6 +1,6 @@
 ---
 title: 'January 21, 2016'
-date: 2017-05-08
+date: 2017-05-08T22:33:55.000Z
 categories:
   - 'motherhood'
   - 'writing'
@@ -13,6 +13,7 @@ tags:
   - 'stories'
   - 'thoughts'
   - 'writing'
+handle: 'january-21-2016'
 ---
 
 I don't remember what time I started crying.

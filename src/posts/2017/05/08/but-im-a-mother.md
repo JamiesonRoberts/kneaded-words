@@ -1,6 +1,6 @@
 ---
 title: "But I'm a mother"
-date: 2017-05-08
+date: 2017-05-08T22:30:26.000Z
 categories:
   - 'motherhood'
   - 'poetry'
@@ -9,6 +9,7 @@ tags:
   - 'honest-motherhood'
   - 'motherhood'
   - 'writing'
+handle: 'but-im-a-mother'
 ---
 
 There's spit up on the thigh of my pant. More grease in my hair than I'd like to admit. The bags of my eyes have bags.

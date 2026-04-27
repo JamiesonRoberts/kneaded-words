@@ -1,7 +1,10 @@
 ---
-import Layout from '../layouts/Layout.astro'
+import Layout from '@/layouts/Layout.astro'
+import Heading from '@/components/Heading.astro'
 
 const seo = {}
 ---
 
-<Layout seo={seo} />
+<Layout seo={seo} hasPageTitle>
+  <Heading text='500, error.' />
+</Layout>

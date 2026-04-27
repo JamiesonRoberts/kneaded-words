@@ -1,6 +1,6 @@
 ---
 title: 'Excerpt - Haven'
-date: 2017-05-08
+date: 2017-05-08T22:43:25.000Z
 categories:
   - 'haven'
   - 'writing'
@@ -10,6 +10,7 @@ tags:
   - 'scifi'
   - 'steampunk'
   - 'writing'
+handle: 'excerpt-haven'
 ---
 
 _The setting is Marsha’s humble apartment where she lives with her grandmother who she supports financially. Most surfaces in the apartment are metal, somewhat worn but clean, the furniture fixed to the floor as on a boat. The front door leads almost directly into the main room, best described in its function as a kitchen, off of which are two bedrooms and a bathroom. It’s evening; Marsha was out all day. Marsha’s grandfather, whom she presumed dead, has suddenly appeared at her doorstep. Her grandmother is overjoyed and has just disappeared into her room to grab an overnight bag. (The story is told from Marsha’s point of view)._

@@ -1,6 +1,6 @@
 ---
 title: 'Ebony Eyes'
-date: 2017-05-08
+date: 2017-05-08T22:32:37.000Z
 tags:
   - 'bad-egg'
   - 'fantasy'
@@ -10,6 +10,7 @@ tags:
   - 'short-story'
   - 'urban'
   - 'writing'
+handle: 'ebony-eyes'
 ---
 
 A short story inspired by Ursula Vernon's "[Bad Egg](http://ursulav.deviantart.com/art/Bad-Egg-3192594)"

@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+import { getCollection } from 'astro:content'
+
+import Layout from '@/layouts/Layout.astro'
+import Heading from '@/components/Heading.astro'
+import GroupList from '@/components/GroupList.astro'
+
+const posts = await getCollection('posts')
+
+const detailedList = [
+  ...new Set(
+    posts
+      .map((post: Post) => post.data?.categories)
+      .filter(Boolean)
+      .flat(),
+  ),
+]
+  .sort()
+  .map((category) => {
+    return {
+      handle: category,
+      count: posts.filter((post: Post) =>
+        post.data?.categories?.includes(category),
+      ).length,
+    }
+  })
+
+const seo = {}
+---
+
+<Layout seo={seo} hasPageTitle>
+  <Heading text={'List of Categories'} />
+
+  <GroupList name='categories' list={detailedList} capitalize />
+</Layout>

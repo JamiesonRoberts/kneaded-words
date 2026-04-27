@@ -1,6 +1,6 @@
 ---
 title: 'ings'
-date: 2017-05-08
+date: 2017-05-08T22:42:46.000Z
 categories:
   - 'poetry'
   - 'writing'
@@ -9,6 +9,7 @@ tags:
   - 'thoughts'
   - 'weird'
   - 'wordplay'
+handle: 'ings'
 ---
 
 smoke clings water wrings silence brings

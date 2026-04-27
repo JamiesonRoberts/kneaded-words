@@ -1,6 +1,6 @@
 ---
 title: 'Dreams of thread and wings'
-date: 2017-05-08
+date: 2017-05-08T22:31:00.000Z
 categories:
   - 'poetry'
   - 'writing'
@@ -11,6 +11,7 @@ tags:
   - 'identity'
   - 'poetry'
   - 'writing'
+handle: 'dreams-of-thread-and-wings'
 ---
 
 I used to be a dreamer

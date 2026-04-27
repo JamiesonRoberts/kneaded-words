@@ -1,6 +1,7 @@
 ---
 title: 'Yarn Dyeing Hiatus'
-date: 2020-12-05
+date: 2020-12-05T16:14:01.000Z
+handle: 'yarn-dyeing-hiatus'
 ---
 
 Hello everyone, and if you've come from my yarn dyeing adventures, welcome to my website that stores old writing. Now that I have had some time and space to think, I wanted to expand on my plans for putting my business on hold.
