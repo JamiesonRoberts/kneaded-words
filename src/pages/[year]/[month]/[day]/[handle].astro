@@ -38,9 +38,13 @@ export const getStaticPaths = (async () => {
 
 const { post, next = null, prev = null } = Astro.props
 const { Content } = await render(post)
+const seo = {
+  title: `${post.data.title} | Kneaded Words`,
+  publishedAt: new Date(post.data.date).toISOString(),
+}
 ---
 
-<Layout hasPageTitle>
+<Layout seo={seo} hasPageTitle={true}>
   <article class:list={'article-entry'}>
     <header class:list={'entry-header'}>
       <h1>{post.data.title}</h1>
@@ -117,5 +121,23 @@ const { Content } = await render(post)
         }
       </nav>
     </footer>
+
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.data.title,
+        datePublished: new Date(post.data.date).toISOString(),
+        url: new URL(Astro.url.pathname, Astro.site),
+        author: [
+          {
+            '@type': 'Person',
+            name: 'Nadia Petrasiunas',
+            url: `${Astro.site.href}#person`,
+          },
+        ],
+      })}
+    />
   </article>
 </Layout>

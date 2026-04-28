@@ -27,10 +27,12 @@ const detailedList = [
     }
   })
 
-const seo = {}
+const seo = {
+  title: `List of Tags | Kneaded Words`,
+}
 ---
 
-<Layout seo={seo} hasPageTitle>
+<Layout seo={seo} hasPageTitle={true}>
   <Heading text={'List of Tags'} />
 
   <GroupList name='tags' list={detailedList} capitalize={false} />

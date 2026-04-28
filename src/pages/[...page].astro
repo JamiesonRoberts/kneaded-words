@@ -26,9 +26,13 @@ export const getStaticPaths = (async ({ paginate }) => {
 }) satisfies GetStaticPaths
 
 const { page } = Astro.props
+
+const seo = {
+  title: `Kneaded Words | Page ${page.currentPage} of ${page.lastPage}`,
+}
 ---
 
-<Layout>
+<Layout seo={seo}>
   {page.data.map((post) => <Excerpt post={post} />)}
 
   <Pagination page={page} />

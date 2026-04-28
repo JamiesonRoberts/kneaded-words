@@ -2,9 +2,11 @@
 import Layout from '@/layouts/Layout.astro'
 import Heading from '@/components/Heading.astro'
 
-const seo = {}
+const seo = {
+  title: `Page Error | Kneaded Words`,
+}
 ---
 
-<Layout seo={seo} hasPageTitle>
+<Layout seo={seo} hasPageTitle={true}>
   <Heading text='500, error.' />
 </Layout>

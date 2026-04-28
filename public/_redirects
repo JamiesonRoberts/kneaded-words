@@ -1,3 +1,6 @@
 /page/:page /:page 302
+/page/:page/ /:page 302
 /category/:category/page/:page /category/:category/:page 302
+/category/:category/page/:page/ /category/:category/:page 302
 /tag/:tag/page/:page /tag/:tag/:page 302
+/tag/:tag/page/:page/ /tag/:tag/:page 302

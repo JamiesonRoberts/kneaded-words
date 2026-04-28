@@ -8,7 +8,7 @@ interface Props {
 }
 
 import { getCollection } from 'astro:content'
-import { POST_SORT, PAGE_SIZE } from '@/constants'
+import { POST_SORT, PAGE_SIZE, DISPLAYIFY } from '@/constants'
 
 import Layout from '@/layouts/Layout.astro'
 import Pagination from '@/components/Pagination.astro'
@@ -42,11 +42,13 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props
 const { category } = Astro.params
 
-const seo = {}
+const seo = {
+  title: `Posts in '${DISPLAYIFY(category, true)}' | Page ${page.currentPage} of ${page.lastPage} | Kneaded Words`,
+}
 ---
 
-<Layout seo={seo} hasPageTitle>
-  <Heading text={category} prefix={'Category'} page={page} />
+<Layout seo={seo} hasPageTitle={true}>
+  <Heading text={DISPLAYIFY(category, true)} prefix={'Category'} page={page} />
 
   {page.data.map((post) => <Excerpt post={post} />)}
 
