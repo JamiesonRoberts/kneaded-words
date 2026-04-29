@@ -1,0 +1,39 @@
+---
+import { DISPLAYIFY } from '@/constants'
+
+const { name, list, capitalize = false } = Astro.props
+---
+
+<section aria-label=`List of ${name}`>
+  <ul class:list={'group-list'}>
+    {
+      [...list].map((item) => (
+        <li class:list={'group-list--item'}>
+          <a href={item.handle}>
+            <>
+              <strong>{DISPLAYIFY(item.handle, capitalize)}</strong>
+              <small>{item.count} posts</small>
+            </>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .group-list {
+    list-style: none;
+    margin: 0;
+    padding: 1.625rem;
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    gap: 1.5rem 2rem;
+  }
+
+  .group-list--item a {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

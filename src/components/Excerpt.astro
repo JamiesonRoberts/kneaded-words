@@ -1,0 +1,69 @@
+---
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  post: Post
+  shouldTruncate?: Boolean
+}
+
+import { render } from 'astro:content'
+
+import { DISPLAYIFY } from '@/constants'
+
+const { post } = Astro.props
+const { Content } = await render(post)
+---
+
+<article class:list={'article-entry'}>
+  <header class:list={'entry-header'}>
+    <h2><a href={`/${post.id}`}>{post.data.title}</a></h2>
+  </header>
+
+  <div class:list={'entry-content'}>
+    <Content />
+  </div>
+  <footer class:list={'entry-footer'}>
+    <div class:list={'entry-footer--meta'}>
+      <div class:list={'entry-footer--meta-element'}>
+        <span class:list={'meta-nav'}>Published on:</span>
+        <span class:list={'meta-content'}
+          >{
+            new Intl.DateTimeFormat('en-CA', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            }).format(post.data.date)
+          }</span
+        >
+      </div>
+      <div class:list={['entry-footer--meta-element', 'tablet-spacer']}></div>
+      {
+        post.data.categories && (
+          <div class:list={'entry-footer--meta-element'}>
+            <span class:list={'meta-nav'}>Categories:</span>
+            <span class:list={'meta-content'}>
+              {post.data.categories
+                .map((tag) => (
+                  <a href={`/category/${tag}`}>{DISPLAYIFY(tag, true)}</a>
+                ))
+                .reduce((prev, curr) => [prev, ', ', curr])}
+            </span>
+          </div>
+        )
+      }
+      {
+        post.data.tags && (
+          <div class:list={'entry-footer--meta-element'}>
+            <span class:list={'meta-nav'}>Tags:</span>
+            <span class:list={'meta-content'}>
+              {post.data.tags
+                .map((tag) => <a href={`/tag/${tag}`}>{DISPLAYIFY(tag)}</a>)
+                .reduce((prev, curr) => [prev, ', ', curr])}
+            </span>
+          </div>
+        )
+      }
+    </div>
+  </footer>
+</article>

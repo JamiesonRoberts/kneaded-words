@@ -1,0 +1,143 @@
+---
+import type { GetStaticPaths } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  post: Post
+  next?: Post
+  prev?: Post
+}
+
+import { getCollection, render } from 'astro:content'
+import { POST_SORT, DISPLAYIFY } from '@/constants'
+
+import Layout from '@/layouts/Layout.astro'
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('posts')
+  const sortedPosts = posts.sort(POST_SORT)
+
+  return sortedPosts.map((post: Post) => {
+    const currentIndex = sortedPosts.findIndex((p: Post) => p.id === post.id)
+
+    const next = sortedPosts[currentIndex - 1]
+    const prev = sortedPosts[currentIndex + 1]
+
+    return {
+      params: {
+        year: post.data.year,
+        month: post.data.month,
+        day: post.data.day,
+        handle: post.data.handle,
+      },
+      props: { post, next, prev },
+    }
+  })
+}) satisfies GetStaticPaths
+
+const { post, next = null, prev = null } = Astro.props
+const { Content } = await render(post)
+const seo = {
+  title: `${post.data.title} | Kneaded Words`,
+  publishedAt: new Date(post.data.date).toISOString(),
+}
+---
+
+<Layout {seo} hasPageTitle={true}>
+  <article class:list={'article-entry'}>
+    <header class:list={'entry-header'}>
+      <h1>{post.data.title}</h1>
+    </header>
+    <div class:list={'entry-content'}>
+      <Content />
+    </div>
+    <footer class:list={'entry-footer'}>
+      <div class:list={'entry-footer--meta'}>
+        <div class:list={'entry-footer--meta-element'}>
+          <span class:list={'meta-nav'}>Published on:</span>
+          <span class:list={'meta-content'}
+            >{
+              new Intl.DateTimeFormat('en-CA', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              }).format(post.data.date)
+            }</span
+          >
+        </div>
+        <div class:list={['entry-footer--meta-element', 'tablet-spacer']}></div>
+        {
+          post.data.categories && (
+            <div class:list={'entry-footer--meta-element'}>
+              <span class:list={'meta-nav'}>Categories:</span>
+              <span class:list={'meta-content'}>
+                {post.data.categories
+                  .map((tag) => (
+                    <a href={`/category/${tag}`}>{DISPLAYIFY(tag, true)}</a>
+                  ))
+                  .reduce((prev, curr) => [prev, ', ', curr])}
+              </span>
+            </div>
+          )
+        }
+        {
+          post.data.tags && (
+            <div class:list={'entry-footer--meta-element'}>
+              <span class:list={'meta-nav'}>Tags:</span>
+              <span class:list={'meta-content'}>
+                {post.data.tags
+                  .map((tag) => <a href={`/tag/${tag}`}>{DISPLAYIFY(tag)}</a>)
+                  .reduce((prev, curr) => [prev, ', ', curr])}
+              </span>
+            </div>
+          )
+        }
+      </div>
+
+      <nav
+        class:list={'entry-footer--pagination'}
+        aria-label={'Post Navigation'}
+      >
+        {
+          prev && (
+            <div class:list={['pagination-element', 'prev']}>
+              <a href={`/${prev.id}`} rel='prev'>
+                <span class:list={'meta-nav'}>Previous Post:</span>
+                <span class:list={'meta-title'}>{prev.data.title}</span>
+              </a>
+            </div>
+          )
+        }
+        {
+          next && (
+            <div class:list={['pagination-element', 'next']}>
+              <a href={`/${next.id}`} rel='prev'>
+                <span class:list={'meta-nav'}>Next Post:</span>
+                <span class:list={'meta-title'}>{next.data.title}</span>
+              </a>
+            </div>
+          )
+        }
+      </nav>
+    </footer>
+
+    <script
+      type='application/ld+json'
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.data.title,
+        datePublished: new Date(post.data.date).toISOString(),
+        url: new URL(Astro.url.pathname, Astro.site),
+        author: [
+          {
+            '@type': 'Person',
+            name: 'Nadia Petrasiunas',
+            url: `${Astro.site.href}#person`,
+          },
+        ],
+      })}
+    />
+  </article>
+</Layout>

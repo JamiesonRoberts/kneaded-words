@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+type Post = CollectionEntry<'post'>
+
+interface Props {
+  page: Page<Post>
+}
+
+import { getCollection } from 'astro:content'
+import { POST_SORT, FRONT_PAGE_CATEGORIES, PAGE_SIZE } from '@/constants'
+
+import Layout from '@/layouts/Layout.astro'
+import Pagination from '@/components/Pagination.astro'
+import Excerpt from '@/components/Excerpt.astro'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('posts', ({ data }) => {
+    if (!data.categories) return true
+    const categories = new Set([...data.categories])
+    return !!categories.intersection(FRONT_PAGE_CATEGORIES).size
+  })
+  const sortedPosts = posts.sort(POST_SORT)
+
+  return paginate(sortedPosts, { pageSize: PAGE_SIZE })
+}) satisfies GetStaticPaths
+
+const { page } = Astro.props
+
+const seo = {
+  title: `Kneaded Words | Page ${page.currentPage} of ${page.lastPage}`,
+}
+---
+
+<Layout seo={seo}>
+  {page.data.map((post) => <Excerpt post={post} />)}
+
+  <Pagination page={page} />
+</Layout>
